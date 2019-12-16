@@ -7,9 +7,9 @@ services:
     restart: always
     ports:
       - "27017:27017"
-    # volumes:
-    #   - ~/data:/data/db
-          
+    volumes:
+      - mongodb_data:/data/db
+
   mongo-express:
     image: mongo-express:0.49.0
     container_name: mongo-express
@@ -23,3 +23,6 @@ services:
 #      - ME_CONFIG_MONGODB_ADMINPASSWORD=example
     depends_on:
       - mongodb
+
+volumes:
+  mongodb_data:
