@@ -2,16 +2,23 @@ version: '3.7'
 
 services:
   mongodb:
-    image: mongo:4.2.2
+    image: mongo:4.2
     container_name: mongodb
 #    restart: always
+    # Port expose is not necessary if only mongo-express is using mongodb not any external service. mongo-express
+    # can access it by the network(mongodb-network). As mongo will auto expose on port 27017 within the network(mongodb-network).
     ports:
       - 27017:27017
     volumes:
       - mongodb_data:/data/db
+    networks:
+#      - mongodb-network
+      mongodb-network:
+        aliases:
+          - mongodb-host
 
   mongo-express:
-    image: mongo-express:0.49.0
+    image: mongo-express:latest
     container_name: mongo-express
 #    restart: always
     ports:
@@ -21,8 +28,13 @@ services:
       - ME_CONFIG_MONGODB_PORT=27017
 #      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
 #      - ME_CONFIG_MONGODB_ADMINPASSWORD=passwword
+    networks:
+      - mongodb-network
     depends_on:
       - mongodb
 
 volumes:
   mongodb_data:
+
+networks:
+  mongodb-network:
