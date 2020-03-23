@@ -4,11 +4,13 @@ services:
   mongodb:
     image: mongo:4.2
     container_name: mongodb
-#    restart: always
-    # Port expose is not necessary if only mongo-express is using mongodb not any external service. mongo-express
-    # can access it by the network(mongodb-network). As mongo will auto expose on port 27017 within the network(mongodb-network).
+    restart: always
     ports:
       - 27017:27017
+#    environment:
+#      MONGO_INITDB_DATABASE: aurick
+#      MONGO_INITDB_ROOT_USERNAME: aurick
+#      MONGO_INITDB_ROOT_PASSWORD: aurick
     volumes:
       - mongodb_data:/data/db
     networks:
@@ -24,10 +26,10 @@ services:
     ports:
       - 8081:8081
     environment:
-      - ME_CONFIG_MONGODB_SERVER=mongodb
-      - ME_CONFIG_MONGODB_PORT=27017
-#      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-#      - ME_CONFIG_MONGODB_ADMINPASSWORD=passwword
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_PORT: 27017
+#     ME_CONFIG_MONGODB_ADMINUSERNAME: aurick
+#     ME_CONFIG_MONGODB_ADMINPASSWORD: aurick
     networks:
       - mongodb-network
     depends_on:
