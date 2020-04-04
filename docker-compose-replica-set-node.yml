@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  mongo-replica-set-node:
+    image: mongo:4.2
+    container_name: mongo-replica-set-node
+    hostname: mongo-replica-set-node
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - mongo-replica-set-node
+    command: mongod --replSet my_replica
+
+networks:
+  mongo-replica-set-node:
