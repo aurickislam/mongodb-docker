@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+  mongo1:
+    image: mongo:4.2
+    container_name: mongo1
+    hostname: mongo1
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - mongo-replica-set
+#    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "my_replica" ]
+    command: mongod --replSet my_replica
+
+  mongo2:
+    image: mongo:4.2
+    container_name: mongo2
+    hostname: mongo2
+    restart: always
+    ports:
+      - 27018:27017
+    networks:
+      - mongo-replica-set
+#    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "my_replica" ]
+    command: mongod --replSet my_replica
+
+  mongo3:
+    image: mongo:4.2
+    container_name: mongo3
+    hostname: mongo3
+    restart: always
+    ports:
+      - 27019:27017
+    networks:
+      - mongo-replica-set
+#    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "my_replica" ]
+    command: mongod --replSet my_replica
+
+networks:
+  mongo-replica-set:
