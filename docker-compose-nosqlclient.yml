@@ -1,0 +1,23 @@
+# https://nosqlclient.com/docs/start.html
+version: '3.7'
+
+services:
+  nosqlclient:
+    image: mongoclient/mongoclient
+    container_name: nosqlclient
+    hostname: nosqlclient
+#    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      MONGOCLIENT_DEFAULT_CONNECTION_URL: mongodb://192.168.88.18:27017
+#    volumes:
+#      - nosqlclient_data:/data/db
+    networks:
+      - nosqlclient
+
+#volumes:
+#  nosqlclient_data:
+
+networks:
+  nosqlclient:
