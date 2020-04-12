@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  adminmongo:
+    image: mrvautin/adminmongo
+    container_name: adminmongo
+    hostname: adminmongo
+#    restart: always
+    ports:
+      - 8089:8089
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8089
+    networks:
+      - adminmongo
+
+networks:
+  adminmongo:
