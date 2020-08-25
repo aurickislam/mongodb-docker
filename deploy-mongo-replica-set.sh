@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 docker-compose -f docker-compose-replicaset.yml up -d && docker exec -it mongo1 mongo;
 
 # Exec the command
