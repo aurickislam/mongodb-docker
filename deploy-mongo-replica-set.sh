@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-docker-compose -f docker-compose-replicaset.yml up -d && docker exec -it mongo1 mongo;
+docker-compose -f docker-compose-replica-set.yml up -d && docker exec -it mongo1 mongo;
 
 # Exec the command
 # rs.initiate({"_id":"my_replica","members":[{"_id":0,"host":"192.168.88.17:27017"},{"_id":1,"host":"192.168.88.17:27018"},{"_id":2,"host":"192.168.88.17:27019"}]})
